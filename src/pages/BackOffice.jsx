@@ -5,7 +5,32 @@ import ProductTable from "../components/ProductsTable";
 
 class BackOffice extends React.Component {
   state = {
-    products: [],
+    products: [
+      {
+        _id: "60015ff562e608230af359fb",
+        name: "app test 1",
+        description: "somthing longer",
+        brand: "nokia",
+        imageUrl: "https://drop.ndtv.com/TECH/product_database/images/2152017124957PM_635_nokia_3310.jpeg?downsize=*:420&output-quality=80",
+        price: 100,
+        category: "smartphones",
+        createdAt: "2021-01-15T09:27:17.429Z",
+        updatedAt: "2021-01-15T09:27:17.429Z",
+        __v: 0,
+      },
+      {
+        _id: "6001606162e608230af359fc",
+        name: "app test 2.2",
+        description: "somthing longer",
+        brand: "nokia",
+        imageUrl: "https://drop.ndtv.com/TECH/product_database/images/2152017124957PM_635_nokia_3310.jpeg?downsize=*:420&output-quality=80",
+        price: 100,
+        category: "smartphones",
+        createdAt: "2021-01-15T09:29:05.562Z",
+        updatedAt: "2021-01-15T09:38:23.113Z",
+        __v: 0,
+      },
+    ],
     loading: true,
     status: "",
     currentProduct: {
@@ -22,7 +47,7 @@ class BackOffice extends React.Component {
   };
   getProducts = async () => {
     let products = await getFunction("/products");
-    if (products.length > 0) {
+    if (products) {
       this.setState({ products, loading: false });
     } else {
       this.setState({ status: "No products" });
@@ -47,7 +72,7 @@ class BackOffice extends React.Component {
       this.setState({ status: result });
     }
   };
-  editProduct = () => {};
+  editProduct = (prod) => this.setState({ currentProduct: prod });
   putProduct = async (e) => {
     e.preventDefault();
     let result = await putFunction("/products", this.state.currentProduct);
@@ -135,7 +160,7 @@ class BackOffice extends React.Component {
         </Form>
 
         <div className='mt-5'>
-          <ProductTable deleteProduct={this.deleteProducts} editProduct={this.editProduct} products={this.state.products} />
+          <ProductTable deleteProduct={this.deleteModal} editProduct={this.editProduct} products={this.state.products} />
         </div>
       </Container>
     );

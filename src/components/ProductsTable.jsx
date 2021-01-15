@@ -21,7 +21,8 @@ const ProductTable = (props) => {
         {products.map((product, i) => (
           <tr key={i}>
             <td>
-              {i + 1} <Image src={product.image ? product.image : "https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"} height='30px' />
+              {i + 1}{" "}
+              <Image src={product.imageUrl ? product.imageUrl : "https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"} height='30px' />
             </td>
             <td>{product.name}</td>
             <td>{product.description}</td>
@@ -29,10 +30,10 @@ const ProductTable = (props) => {
             <td>{product.category}</td>
             <td>{product.price}</td>
             <td>
-              <Button variant='warning' onClick={() => editProduct(product.ID)}>
+              <Button variant='warning' onClick={() => editProduct(product)}>
                 Edit
               </Button>
-              <Button onClick={() => deleteProduct(product.ID)} variant='danger'>
+              <Button onClick={() => deleteProduct(product._id)} variant='danger'>
                 Delete
               </Button>
               <Link to={"/projects/" + product.ID + "/" + product.name + " " + product.surname}>
